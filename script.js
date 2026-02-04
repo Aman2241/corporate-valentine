@@ -180,20 +180,50 @@ const app = {
 
     // --- Actions ---
     sendAppreciation() {
-        this.showToast("You sent a virtual 'High Five' to the team!", 'love');
+        // Create a custom prompt using the modal system
+        const overlay = this.createModal(`
+            <h2>Send Appreciation</h2>
+            <p>Who deserves a virtual rose?</p>
+            <input type="text" id="kudos-name" placeholder="E.g., @coworker">
+            <button class="btn-action" id="submit-kudos">Send Rose 🌹</button>
+        `);
+
+        const input = overlay.querySelector('#kudos-name');
+        input.focus();
+
+        overlay.querySelector('#submit-kudos').onclick = () => {
+            const name = input.value.trim() || "the team";
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.remove(), 300);
+
+            setTimeout(() => {
+                this.showToast(`Virtual Rose sent to <strong>${name}</strong>!`, 'love');
+            }, 500);
+        };
     },
 
     proposeIdea() {
         const overlay = this.createModal(`
-            <h2>Pitching...</h2>
-            <div style="font-size:3rem; margin: 1rem 0;">💼 ➡️ 🗑️</div>
-            <p>Your idea has been successfully filed in the 'Later' bin.</p>
-            <button class="btn-action" id="close-modal" style="margin-top:1rem">Understood</button>
+            <h2>Pitch New Idea</h2>
+            <p>Describe your breakthrough:</p>
+            <textarea rows="3" placeholder="E.g., 4-day work week..."></textarea>
+            <button class="btn-action" id="submit-idea">Submit Pitch</button>
         `);
 
-        overlay.querySelector('#close-modal').onclick = () => {
-            overlay.classList.remove('active');
-            setTimeout(() => overlay.remove(), 300);
+        overlay.querySelector('textarea').focus();
+
+        overlay.querySelector('#submit-idea').onclick = () => {
+            overlay.innerHTML = `
+                <h2>Pitching...</h2>
+                <div style="font-size:3rem; margin: 1rem 0;">💼 ➡️ 🗑️</div>
+                <p>Your idea has been successfully filed in the 'Later' bin.</p>
+                <button class="btn-action" id="close-modal" style="margin-top:1rem">Understood</button>
+            `;
+
+            overlay.querySelector('#close-modal').onclick = () => {
+                overlay.classList.remove('active');
+                setTimeout(() => overlay.remove(), 300);
+            };
         };
     },
 
