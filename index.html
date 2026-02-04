@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Valentine Week | HR Approved</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Corp<span>Love</span>.inc</div>
+        <ul class="nav-links">
+            <li><a href="#rose">Rose</a></li>
+            <li><a href="#propose">Propose</a></li>
+            <li><a href="#chocolate">Chocolate</a></li>
+            <li><a href="#teddy">Teddy</a></li>
+            <li><a href="#promise">Promise</a></li>
+            <li><a href="#hug">Hug</a></li>
+            <li><a href="#kiss">KISS</a></li>
+            <li><a href="#valentine">Valentine</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="badge">MEMO: URGENT</span>
+            <h1>The Corporate Valentine Protocol</h1>
+            <p>Optimizing romance for maximum Q1 synergy.</p>
+            <a href="#rose" class="btn-primary">Review Policy</a>
+        </div>
+        <div class="hero-bg-elements">
+            <!-- Animated background elements handled by CSS/JS -->
+        </div>
+    </header>
+
+    <main>
+        <!-- ROSE DAY -->
+        <section id="rose" class="day-section">
+            <div class="card glass">
+                <div class="date-badge">Feb 7</div>
+                <h2>Appreciation Rose Day</h2>
+                <div class="content icon-layout">
+                    <div class="icon">🌹</div>
+                    <p>"Smells like team spirit."</p>
+                    <p class="description">Virtual roses for colleagues who didn't 'reply all' today.</p>
+                    <button class="btn-action" onclick="app.sendAppreciation()">Send Kudos</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROPOSE DAY -->
+        <section id="propose" class="day-section">
+            <div class="card glass reverse">
+                <div class="date-badge">Feb 8</div>
+                <h2>Propose a New Idea Day</h2>
+                <div class="content icon-layout">
+                    <div class="icon">💍</div>
+                    <p>"Will you be my... co-founder?"</p>
+                    <p class="description">Get down on one knee and propose... a better Jira workflow.</p>
+                    <button class="btn-action" onclick="app.proposeIdea()">Pitch Pitch</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHOCOLATE DAY -->
+        <section id="chocolate" class="day-section">
+            <div class="card glass">
+                <div class="date-badge">Feb 9</div>
+                <h2>debug_chocolates()</h2>
+                <div class="content icon-layout">
+                    <div class="icon">🍫</div>
+                    <p>"Sweet syntax for bitter bugs."</p>
+                    <p class="description">Converting caffeine and sugar into deployed code.</p>
+                    <button class="btn-action" onclick="app.dispenseTreat()">Grab Byte</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEDDY DAY -->
+        <section id="teddy" class="day-section">
+            <div class="card glass reverse">
+                <div class="date-badge">Feb 10</div>
+                <h2>Emotional Support Teddy</h2>
+                <div class="content icon-layout">
+                    <div class="icon">🧸</div>
+                    <p>"Hugs for bugs."</p>
+                    <p class="description">Approved desktop companion for when production goes down.</p>
+                    <button class="btn-action" onclick="app.squeezeTeddy()">Squeeze</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROMISE DAY -->
+        <section id="promise" class="day-section">
+            <div class="card glass">
+                <div class="date-badge">Feb 11</div>
+                <h2>Promise to Documentation</h2>
+                <div class="content icon-layout">
+                    <div class="icon">🤞</div>
+                    <p>"Commit to your commits."</p>
+                    <p class="description">I solemnly swear to comment my code this fiscal quarter.</p>
+                    <button class="btn-action" onclick="app.makePromise()">git commit -m "Promise"</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- HUG DAY -->
+        <section id="hug" class="day-section">
+            <div class="card glass reverse">
+                <div class="date-badge">Feb 12</div>
+                <h2>Group Hug (Exception Handling)</h2>
+                <div class="content icon-layout">
+                    <div class="icon">🫂</div>
+                    <p><code>try { hug() } catch (e) { panic() }</code></p>
+                    <p class="description">Wrapping our arms around the legacy codebase.</p>
+                    <button class="btn-action" onclick="app.groupHug()">Catch All</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- KISS DAY -->
+        <section id="kiss" class="day-section">
+            <div class="card glass">
+                <div class="date-badge">Feb 13</div>
+                <h2>K.I.S.S. Principle Day</h2>
+                <div class="content icon-layout">
+                    <div class="icon">💋</div>
+                    <p>"Keep It Simple, Stupid."</p>
+                    <p class="description">Refactoring romance. Removing complexity from relationships.</p>
+                    <button class="btn-action" onclick="app.refactorLove()">Simplify</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VALENTINE'S DAY -->
+        <section id="valentine" class="day-section final-day">
+            <div class="card glass glowing">
+                <div class="date-badge">Feb 14</div>
+                <h2>Client Love Day</h2>
+                <div class="content icon-layout">
+                    <div class="icon">💖</div>
+                    <p>"Deployed with Love."</p>
+                    <p class="description">The ultimate deliverable. 100% Uptime on our hearts.</p>
+                    <button class="btn-action" onclick="app.celebrate()">Merge to Master</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Corporate Valentine Initiative. All Rights Reserved. HR is watching.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
