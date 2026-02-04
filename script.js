@@ -2,6 +2,26 @@ const app = {
     init() {
         console.log('Corporate Valentine Protocol Initiated...');
         this.addScrollEffects();
+        this.initMobileNav();
+    },
+
+    initMobileNav() {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
     },
 
     addScrollEffects() {
@@ -70,7 +90,7 @@ const app = {
         confetti.style.zIndex = '9999';
         confetti.innerHTML = '<div style="display:flex; justify-content:center; align-items:center; height:100%; font-size:5rem;">🚀💖💰</div>';
         document.body.appendChild(confetti);
-        
+
         setTimeout(() => confetti.remove(), 3000);
         alert("Release successful! Client is happy. Go home.");
     }
