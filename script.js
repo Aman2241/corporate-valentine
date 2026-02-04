@@ -148,42 +148,162 @@ const app = {
         });
     },
 
-    // Actions
+    // --- UI Helpers ---
+    showToast(message, type = 'info') {
+        let toast = document.querySelector('.toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.className = 'toast';
+            document.body.appendChild(toast);
+        }
+
+        const icon = type === 'love' ? '❤️' : '📢';
+        toast.innerHTML = `<span style="font-size: 1.5rem">${icon}</span> <div><strong>New Notification</strong><br>${message}</div>`;
+
+        requestAnimationFrame(() => toast.classList.add('active'));
+
+        setTimeout(() => {
+            toast.classList.remove('active');
+        }, 3000);
+    },
+
+    createModal(content) {
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        overlay.innerHTML = `<div class="modal">${content}</div>`;
+        document.body.appendChild(overlay);
+
+        requestAnimationFrame(() => overlay.classList.add('active'));
+
+        return overlay;
+    },
+
+    // --- Actions ---
     sendAppreciation() {
-        alert("Success! 500 'Kudos' coins transferred to colleague's dormant account.");
+        this.showToast("You sent a virtual 'High Five' to the team!", 'love');
     },
 
     proposeIdea() {
-        const ideas = [
-            "Meeting-free Fridays (Rejected)",
-            "Free Coffee IV Drips (Pending Approval)",
-            "Nap Pods in Server Room (Under Review)"
-        ];
-        const randomIdea = ideas[Math.floor(Math.random() * ideas.length)];
-        alert(`Pitching: ${randomIdea}`);
+        const overlay = this.createModal(`
+            <h2>Pitching...</h2>
+            <div style="font-size:3rem; margin: 1rem 0;">💼 ➡️ 🗑️</div>
+            <p>Your idea has been successfully filed in the 'Later' bin.</p>
+            <button class="btn-action" id="close-modal" style="margin-top:1rem">Understood</button>
+        `);
+
+        overlay.querySelector('#close-modal').onclick = () => {
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.remove(), 300);
+        };
     },
 
     dispenseTreat() {
-        alert("Error: Virtual Chocolate Printer not connected. Please clear cookies.");
+        const btn = document.querySelector('#chocolate .btn-action');
+        const originalText = btn.innerText;
+        btn.innerText = "ERR_SUGAR_LOW";
+        btn.style.color = "red";
+
+        // Glitch effect on the card
+        const card = document.querySelector('#chocolate .card');
+        card.style.animation = "glitch-anim 0.2s 5";
+
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.color = "";
+            card.style.animation = "";
+            this.showToast("Bug fixed: Chocolate wrapper exception.", 'info');
+        }, 1000);
     },
 
     squeezeTeddy() {
-        alert("*SQUEAK* 'It works on my machine.'");
+        const card = document.querySelector('#teddy .card');
+        card.classList.add('shaking');
+
+        // Spawn hearts
+        for (let i = 0; i < 10; i++) {
+            const heart = document.createElement('div');
+            heart.innerText = '💖';
+            heart.style.position = 'absolute';
+            heart.style.left = '50%';
+            heart.style.top = '50%';
+            heart.style.transform = `translate(-50%, -50%) translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)`;
+            heart.style.transition = 'all 1s ease-out';
+            heart.style.opacity = '1';
+            heart.style.fontSize = '2rem';
+            heart.style.pointerEvents = 'none';
+            card.appendChild(heart);
+
+            setTimeout(() => {
+                heart.style.opacity = '0';
+                heart.style.transform += ' translateY(-50px)';
+            }, 50);
+
+            setTimeout(() => heart.remove(), 1050);
+        }
+
+        setTimeout(() => {
+            card.classList.remove('shaking');
+        }, 500);
     },
 
     makePromise() {
-        alert("Promise committed to git with SHA-1: 8badf00d");
+        const overlay = document.createElement('div');
+        overlay.className = 'terminal-overlay active';
+        overlay.innerHTML = `
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="dot red" onclick="this.closest('.terminal-overlay').remove()"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-body" id="term-text"></div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        const text = "> git commit -m 'I promise to document my code'\n> [master 8badf00] Promise committed.\n> git push origin master\n> ... Success.";
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                document.getElementById('term-text').innerText += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            } else {
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                    setTimeout(() => overlay.remove(), 300);
+                }, 1500);
+            }
+        };
+        typeWriter();
     },
 
     groupHug() {
-        alert("Exception Caught: PersonalSpaceViolationException. Safe mode enabled.");
+        document.body.style.transition = "transform 0.5s";
+        document.body.style.transform = "scale(0.9)";
+        this.showToast("🤗 Group hug initiated...");
+
+        setTimeout(() => {
+            document.body.style.transform = "scale(1)";
+        }, 1000);
     },
 
     refactorLove() {
-        alert("Deleting 'Ex' variable... Optimization complete.");
+        const kissSection = document.querySelector('#kiss');
+        kissSection.style.transition = "all 0.5s";
+        kissSection.style.filter = "grayscale(100%) blur(2px)";
+
+        setTimeout(() => {
+            kissSection.style.filter = "none";
+            this.showToast("Complexity reduced by 40%.");
+        }, 1000);
     },
 
     celebrate() {
+        this.showToast("🚀 Deploying to Production...", 'love');
+
+        // Intensity the background particles
+        // (Assuming existing confetti logic or enhancing it)
         const confetti = document.createElement('div');
         confetti.style.position = 'fixed';
         confetti.style.top = '0';
@@ -192,11 +312,10 @@ const app = {
         confetti.style.height = '100vh';
         confetti.style.pointerEvents = 'none';
         confetti.style.zIndex = '9999';
-        confetti.innerHTML = '<div style="display:flex; justify-content:center; align-items:center; height:100%; font-size:5rem;">🚀💖💰</div>';
+        confetti.innerHTML = '<div style="display:flex; justify-content:center; align-items:center; height:100%; font-size:5rem; animation: shake 0.5s infinite;">🚀💖💰</div>';
         document.body.appendChild(confetti);
 
         setTimeout(() => confetti.remove(), 3000);
-        alert("Release successful! Client is happy. Go home.");
     }
 };
 
